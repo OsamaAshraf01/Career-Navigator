@@ -99,7 +99,12 @@ APP_LAYOUT = html.Div([
 
         html.Section([
             html.H2("Salary Distribution"),
-            dcc.Graph(id='3D-graph'),
+            html.Div([
+                dcc.Graph(
+                    id='3D-graph',
+                    style={'width': '50%'},
+                ),
+            ], style={'display': 'flex', 'justifyContent': 'center'}),
         ], className="section-1"),
 
         html.Section([
