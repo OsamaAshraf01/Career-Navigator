@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Pacifico&display=swap');
+/*font-family: "Pacifico", cursive;font-weight: 400;font-style: normal;*/
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Merienda:wght@300..900&family=Pacifico&display=swap');
+
+::selection {
+    color: white;
+    background: #84CC16;
+}
+
+
+html {
+    background-color: #1e293b;
+}
+
+.main-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#skills-network {
+    background-color: #1a2332;
+}
+
+h1 {
+    color: #84CC16;
+    text-align: center;
+    font-size: 100px;
+    padding-top: 100px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    font-family: "Merienda", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h2 {
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+    font-family: "Merienda", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+p {
+    color: #fff;
+    text-align: center;
+    font-size: 120%;
+    margin-top: -5px;
+}
+
+#check-boxes-div p {
+    text-align: left;
+}
+section{
+    padding: 20px 50px 50px 50px;
+}
+.section-1 {
+    background-color: #1a2332;
+}
+
+.section-2 {
+    background-color: #1e293b;
+}
+
+section p {
+    text-align: left;
+}
+
+input {
+    background-color: #fff;
+    font-size: 20px;
+    width: 40%;
+    height: 80px;
+    border-radius: 40px;
+    border: none;
+    padding: 0 40px 0 40px;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+button {
+    background-color: #84CC16;
+    font-size: 20px;
+    width: 40%;
+    height: 80px;
+    border-radius: 40px;
+    padding: 0 40px 0 40px;
+    border: none;
+    margin-top: 20px;
+    box-sizing: content-box;
+}
+
+.inputs {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+button:hover {
+    background-color: #72af15;
+    cursor: pointer;
+}
+
+/* Animation for button click */
+@keyframes click-animation {
+    0% {
+        background-color: #4CAF50; /* Original color */
+        color: white;
+    }
+    50% {
+        background-color: #d4d4d4; /* Temp color change */
+        color: black;
+    }
+    100% {
+        background-color: #4CAF50; /* Return to original color */
+        color: white;
+    }
+}
+
+button:active { /* When the button is clicked */
+    animation: click-animation 0.6s 1;
+}

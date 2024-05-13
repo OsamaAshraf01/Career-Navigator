@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Merienda:wght@300..900&family=Pacifico&display=swap');
+
+
+h3{
+    color: white;
+}
+
+h3 span {
+    color:#84CC16;
+    font-size: 200%;
+    font-family: "Merienda", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.courses-list {
+    color: white;
+}
+
+a{
+    color:#84CC16;
+}
+
+a:hover{
+    color:#70ac15;
+}
+
+a:active{
+    color:#558113;
+} 
