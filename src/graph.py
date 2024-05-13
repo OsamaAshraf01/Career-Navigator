@@ -87,8 +87,8 @@ default_graph = px.bar(pd.DataFrame({'Skill': [], 'Demand': []}), y='Skill', x='
 )
 
 
-def make_bar_graph(nodes, edges):
-    betweenness = calc_betweenness(edges, main_nodes=nodes)  # , exclude=['Data Analysis'])
+def make_bar_graph(nodes, edges, excluded_skills=[]):
+    betweenness = calc_betweenness(edges, main_nodes=nodes, exclude=excluded_skills)  # , exclude=['Data Analysis'])
     df = pd.DataFrame(betweenness).reset_index()
     df.columns = ['Skill', 'Demand']
     graph_height = app_settings.SKILLS_COUNT * 60  # Making a relation between graph size and skills count
