@@ -1,12 +1,11 @@
 from dash import Dash, Input, Output, State, callback
 from helpers.variables import APP_LAYOUT
-from functions import get_jobs, get_job_title, get_skills
+from functions import get_jobs, extract_graph_elements
 from graph import make_bar_graph
 from insights import conclude_insights
 from network import generate_network
 from maps import generate_heatmap
 from plot_3d import make_3D_plot
-
 
 # TODO: Filter graph from zero Centrality edges
 # TODO: Add conclusions from Betweenness (Bar Graph and text)
@@ -31,23 +30,11 @@ app.layout = APP_LAYOUT
     prevent_initial_call=True
 )
 def update_graphs(n_clicks, job_title: str):
-    matched_jobs = get_jobs(job_title)
-    print(f"Matched Jobs: {len(matched_jobs)}")
-    links = matched_jobs['job_link']
-    edges = []
-    skills_nodes = []
-    titles_nodes = []
+    #? Get Matched Jobs
+    matched_jobs, links = get_jobs(job_title)
 
-    for i in range(100):
-        link = links.iloc[i]
-        title = get_job_title(link)
-        job_skills = get_skills(link)
-
-        edges += [(title, skill.title()) for skill in job_skills]
-        skills_nodes += [skill.title() for skill in job_skills]
-        titles_nodes += [title]
-
-
+    #? Extract Graph Elements
+    titles_nodes, skills_nodes, edges = extract_graph_elements(links)
 
     #! Network Section
     Graph_elements = generate_network(titles_nodes, skills_nodes, edges)
@@ -62,7 +49,7 @@ def update_graphs(n_clicks, job_title: str):
     heatmap = generate_heatmap(matched_jobs)
     
     #! 3D Plotting Section
-    plot_3d = make_3D_plot()
+    plot_3d = make_3D_plot(matched_jobs)
 
 
     return Graph_elements, skills_bar, highest_skill, related_courses, heatmap, plot_3d, {'display' : 'block'} # 
