@@ -1,6 +1,8 @@
 import pandas as pd
 import plotly.express as px
 from network import calc_betweenness
+from helpers.config import get_settings
+app_settings = get_settings()
 
 background_rectangles = [
     dict(
@@ -87,7 +89,8 @@ def make_bar_graph(nodes, edges):
     betweenness = calc_betweenness(edges, main_nodes=nodes)  # , exclude=['Data Analysis'])
     df = pd.DataFrame(betweenness).reset_index()
     df.columns = ['Skill', 'Demand']
-    skills_bar = px.bar(df, y='Skill', x='Demand', orientation='h', height=2000)  # Creat Bar Graph
+    graph_height = app_settings.SKILLS_COUNT * 40 # Making a relation between graph size and skills count
+    skills_bar = px.bar(df, y='Skill', x='Demand', orientation='h', height=graph_height)  # Creat Bar Graph
     skills_bar.update_layout(
         xaxis=dict(
             range=[0, 100],  # Rearrange X-axis
