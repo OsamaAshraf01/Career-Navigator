@@ -56,7 +56,7 @@ def update_graphs(n_clicks, excluded_skills, job_title: str):
 
     # ! Bar Graph Section
     excluded_skills = [skill.strip(' ') for skill in excluded_skills]
-    print('----->',excluded_skills)
+    betweenness = betweenness[~betweenness.isin(excluded_skills)].values
     skills_bar = make_bar_graph(titles_nodes, edges, excluded_skills)[0]
 
     # ! Insights Secion
