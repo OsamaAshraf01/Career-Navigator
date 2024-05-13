@@ -1,7 +1,7 @@
-import matplotlib.pyplot as plt
 import networkx as nx
 import pandas as pd
-
+from helpers.config import get_settings
+app_settings = get_settings()
 
 def wrap(txt: str) -> str:
     if len(txt) > 20:
@@ -27,7 +27,8 @@ def calc_betweenness(edges: list[tuple], main_nodes: list = [], exclude: list = 
     filtered_betweenness = {wrap(k): round(v, 2) for k, v in betweenness.items() if k not in main_nodes}
     filtered_betweenness = pd.Series(filtered_betweenness).sort_values(ascending=False)  # Sort Descendingly
     try:
-        filtered_betweenness = filtered_betweenness[:50]
+        skills_count = app_settings.SKILLS_COUNT
+        filtered_betweenness = filtered_betweenness[:skills_count]
     except:
         pass  # Don't crop
 
