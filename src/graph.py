@@ -89,7 +89,7 @@ def make_bar_graph(nodes, edges):
     betweenness = calc_betweenness(edges, main_nodes=nodes)  # , exclude=['Data Analysis'])
     df = pd.DataFrame(betweenness).reset_index()
     df.columns = ['Skill', 'Demand']
-    graph_height = app_settings.SKILLS_COUNT * 40 # Making a relation between graph size and skills count
+    graph_height = app_settings.SKILLS_COUNT * 60 # Making a relation between graph size and skills count
     skills_bar = px.bar(df, y='Skill', x='Demand', orientation='h', height=graph_height)  # Creat Bar Graph
     skills_bar.update_layout(
         xaxis=dict(
