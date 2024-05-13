@@ -9,13 +9,14 @@ postings = pd.read_csv(postings_path)
 skills = pd.read_csv(skills_path)
 
 
-def get_jobs(query: str) -> pd.DataFrame:
+def get_jobs(query: str) -> tuple[pd.DataFrame, pd.Series]:
     query = query.lower()
 
     postings['job_title'] = postings['job_title'].str.lower()
     matched_jobs = postings.loc[postings['job_title'].str.contains(query)]
 
-    return matched_jobs
+    print(f"Matched Jobs: {len(matched_jobs)}")
+    return matched_jobs, matched_jobs['job_link']
 
 
 def get_skills(link: str) -> list[str]:  # -> tuple[np.ndarray, set]
@@ -46,6 +47,24 @@ def get_job_loction(link: str) -> str:
         pass
 
     return location
+
+
+def extract_graph_elements(links: pd.Series) -> tuple[list, list, list]:
+    edges = []
+    skills_nodes = []
+    titles_nodes = []
+
+    jobs_count = app_settings.RESULT_JOBS_COUNT
+    for i in range(jobs_count):
+        link = links.iloc[i]
+        title = get_job_title(link)
+        job_skills = get_skills(link)
+
+        edges += [(title, skill.title()) for skill in job_skills]
+        skills_nodes += [skill.title() for skill in job_skills]
+        titles_nodes += [title]
+
+    return titles_nodes, skills_nodes, edges
 
 
 
