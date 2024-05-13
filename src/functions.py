@@ -67,7 +67,6 @@ def extract_graph_elements(links: pd.Series) -> tuple[list, list, list]:
     return titles_nodes, skills_nodes, edges
 
 
-
 if __name__ == "__main__":
     print(postings)
     print("==============")

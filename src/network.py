@@ -1,7 +1,9 @@
 import networkx as nx
 import pandas as pd
 from helpers.config import get_settings
+
 app_settings = get_settings()
+
 
 def wrap(txt: str) -> str:
     if len(txt) > 20:
@@ -57,11 +59,10 @@ def generate_network(titles_nodes, skills_nodes, edges):
         for source, target in edges
     ]
     Graph_elements = graph_nodes + graph_edges
-    
+
     print("Rendering Network has finished !")
 
     return Graph_elements
-
 
 # if __name__ == "__main__":
 #     edges = [

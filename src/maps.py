@@ -24,7 +24,7 @@ def geocode_location(place):
     if place in cache_df.index:
         # Fetch from cache
         location = cache_df.loc[place]
-        lat, lon =  location['Latitude'], location['Longitude']
+        lat, lon = location['Latitude'], location['Longitude']
     else:
         params = {
             'key': locationiq_api_key,
@@ -68,23 +68,24 @@ def generate_heatmap(matched_jobs):
     locations = matched_jobs['job_location']
     latitudes, longitudes = geocode(locations)
     df = pd.DataFrame({
-        'latitude' : latitudes,
-        'longitude' : longitudes,
+        'latitude': latitudes,
+        'longitude': longitudes,
     })
     # Making a Heatmap using mapbox website
     heatmap = px.density_mapbox(df, lat="latitude", lon="longitude", zoom=1, height=600, radius=20)
     heatmap.update_layout(
-        mapbox_style="mapbox://styles/osama-ashraf/clvxxlnsh01vt01o03r6dfca8",  #? My Specific Style 😎😎
+        mapbox_style="mapbox://styles/osama-ashraf/clvxxlnsh01vt01o03r6dfca8",  # ? My Specific Style 😎😎
         mapbox_accesstoken=mapbox_access_token,
-        mapbox = {
-            'center' : {'lat':0, 'lon':0},  # Centering at the geometric center of the world map
+        mapbox={
+            'center': {'lat': 0, 'lon': 0},  # Centering at the geometric center of the world map
         },
-        margin = {'t':0, 'r':0, 'b':0, 'l':0}
+        margin={'t': 0, 'r': 0, 'b': 0, 'l': 0}
     )
- 
+
     print("Generating Heatmap has finished !")
 
     return heatmap
+
 
 if __name__ == "__main__":
     S = pd.Series(

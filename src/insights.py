@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from dash import html
 
-def get_related_courses(query:str) -> list[str]:
+
+def get_related_courses(query: str) -> list[str]:
     query = query.split()
     query = '+'.join(query)
     response = requests.get(f'https://www.coursera.org/search?query={query}')
@@ -34,6 +35,5 @@ def conclude_insights(betweenness):
     ], className='related-courses')
 
     print("Making insights has finished !")
-
 
     return related_courses, highest_skill

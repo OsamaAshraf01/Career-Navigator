@@ -22,7 +22,6 @@ function append_check(label_text) {
 };
 
 
-
-function button_load(){
+function button_load() {
     // To make loading button
 }

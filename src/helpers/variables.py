@@ -62,7 +62,7 @@ APP_LAYOUT = html.Div([
                 stylesheet=network_stylesheet,
                 style={
                     'width': '100%',
-                    'height': '1000px',},
+                    'height': '1000px', },
                 layout={
                     'name': 'concentric'
                 },
@@ -91,7 +91,7 @@ APP_LAYOUT = html.Div([
             html.H2("Jobs Distribution"),
             html.Div([
                 dcc.Graph(
-                    id = 'heatmap',
+                    id='heatmap',
                     style={'width': '80%'},
                 )
             ], style={'display': 'flex', 'justifyContent': 'center'}),
@@ -112,5 +112,5 @@ APP_LAYOUT = html.Div([
             html.P("Matched Jobs"),
             html.P("Automatic Apply"),
         ], className="section-2"),
-    ], id='anaysis-div', style={'display' : 'none'})
+    ], id='anaysis-div', style={'display': 'none'})
 ], className='main-div')

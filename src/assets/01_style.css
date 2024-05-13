@@ -56,9 +56,11 @@ p {
 #check-boxes-div p {
     text-align: left;
 }
-section{
+
+section {
     padding: 20px 50px 50px 50px;
 }
+
 .section-1 {
     background-color: #1a2332;
 }
