@@ -1,6 +1,8 @@
 import dash_cytoscape as cyto
 from dash import dcc, html
 from graph import default_graph
+from helpers.config import get_settings
+app_settings = get_settings()
 
 network_stylesheet = [
     {
@@ -44,16 +46,24 @@ network_stylesheet = [
 ]
 
 APP_LAYOUT = html.Div([
-    html.H1("Jobs Analyzer"),
+    html.H1(app_settings.APP_NAME),
     html.P("Get Ready for Your Next Job"),
     html.Div([
         dcc.Input(id='entered-job-title', type='text', placeholder='Enter a job title'),
-        html.Button('Search', id='submit-value', n_clicks=0, className='main-button'),
+        html.Button('Search', id='search-button', n_clicks=0, className='main-button'),
     ], className="inputs"),
     html.Div([
-        html.Div([
-            # html.P("Check Known Skills:"), should be added after clicking search
-        ], id='check-boxes-div'),
+        html.H2("Check Known Skills:"), # should be added after clicking search
+        html.Div(
+            dcc.Checklist(
+                id='skills-checklist',
+                options = [],
+                value = []  # Selected Items
+            )
+        ),
+        html.Button('Continue', id='continue-button', n_clicks=0, className='main-button'),
+    ], id='options-div', style={'display':'none'}),
+    html.Div([
         html.Section([
             html.H2("Jobs-Skills Network"),
             cyto.Cytoscape(
@@ -64,7 +74,8 @@ APP_LAYOUT = html.Div([
                     'width': '100%',
                     'height': '1000px', },
                 layout={
-                    'name': 'concentric'
+                    'name': 'concentric',
+                    'fit' : True
                 },
             ),
         ], className="section-1"),
@@ -107,10 +118,10 @@ APP_LAYOUT = html.Div([
             ], style={'display': 'flex', 'justifyContent': 'center'}),
         ], className="section-1"),
 
-        html.Section([
-            html.H2("Getting Hired"),
-            html.P("Matched Jobs"),
-            html.P("Automatic Apply"),
-        ], className="section-2"),
+        # html.Section([
+        #     html.H2("Getting Hired"),
+        #     html.P("Matched Jobs"),
+        #     html.P("Automatic Apply"),
+        # ], className="section-2"),
     ], id='anaysis-div', style={'display': 'none'})
 ], className='main-div')

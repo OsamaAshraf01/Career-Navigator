@@ -1,0 +1,28 @@
+#options-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+#skills-checklist{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Define 4 columns of equal size */
+    grid-template-rows: repeat(4, 1fr); /* Define 5 rows of equal size */
+    gap: 20px;
+}
+
+#skills-checklist label{
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+#skills-checklist input[type="checkbox"]:checked ~ .checkmark{
+    background-color: #84CC16;
+}
+
+#continue-button{
+    width: 20%;
+}
