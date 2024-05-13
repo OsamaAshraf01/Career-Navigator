@@ -2,7 +2,6 @@ import pandas as pd
 import plotly.express as px
 import requests
 from helpers.config import get_settings
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 app_settings = get_settings()
 # Mapbox
@@ -20,7 +19,7 @@ except FileNotFoundError:
     cache_df = pd.DataFrame(columns=['Place', 'Latitude', 'Longitude']).set_index('Place')
 
 
-def geocode_location(place):
+def geocode_location(place) -> tuple[float, float]:
     if place in cache_df.index:
         # Fetch from cache
         location = cache_df.loc[place]
@@ -53,14 +52,12 @@ def geocode(places: pd.Series) -> tuple[list, list]:
     print(f"Places After Clearing: {len(places)}")
 
     results = [[], []]
-    with ThreadPoolExecutor(
-            max_workers=3) as executor:  # To Speed up Geocoding. There will be some missing values but better than slow :)
-        # Create a future for each geocoding request
-        futures = {executor.submit(geocode_location, place): place for place in places}
-        for future in as_completed(futures):
-            lat, lon = future.result()
-            results[0].append(lat)
-            results[1].append(lon)
+
+    for place in places:
+        lat, lon = geocode_location(place)
+        results[0].append(lat)
+        results[1].append(lon)
+
     return results
 
 
