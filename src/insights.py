@@ -6,7 +6,11 @@ from dash import html
 def get_related_courses(query: str) -> list[str]:
     query = query.split()
     query = '+'.join(query)
-    response = requests.get(f'https://www.coursera.org/search?query={query}')
+    try:
+        response = requests.get(f'https://www.coursera.org/search?query={query}')
+    except:
+        print("Couldn't access Coursera")
+        return []
     soup = BeautifulSoup(response.text, 'html5lib')
     a_tags = soup.find_all('a')
     links = []
@@ -20,7 +24,9 @@ def get_related_courses(query: str) -> list[str]:
 
 def conclude_insights(betweenness):
     highest_skill_name = str(betweenness.index[-1])
+    
     courses_links = get_related_courses(highest_skill_name)  # TODO! Make sure that it is working properly
+    
     highest_skill = html.Div([
         html.H3([
             'Next Skill to Learn: ',
