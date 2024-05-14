@@ -128,6 +128,6 @@ def make_bar_graph(nodes, edges, excluded_skills=[]):
         selector=dict(type='bar'),
     )
 
-    print("Rendering Skills bar graph  has finished !")
+    # print("Rendering Skills bar graph  has finished !")
 
     return skills_bar, betweenness

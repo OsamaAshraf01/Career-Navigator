@@ -56,11 +56,16 @@ def update_graphs(n_clicks, excluded_skills, job_title: str):
 
     # ! Bar Graph Section
     excluded_skills = [skill.strip(' ') for skill in excluded_skills]
-    global betweenness
-    betweenness = betweenness[~betweenness.isin(excluded_skills)].values
-    skills_bar = make_bar_graph(titles_nodes, edges, excluded_skills)[0]
+    skills_bar = make_bar_graph(titles_nodes, edges)[0]
 
-    # ! Insights Secion
+    # ! Insights Secion    global betweenness
+    global betweenness
+    print('--->excluded_skills=', excluded_skills)
+    for skill in excluded_skills:
+        try:
+            betweenness = betweenness.drop(skill) # Remove known skills
+        except:
+            pass
     related_courses, highest_skill = conclude_insights(betweenness)
 
     # ! Jobs Destribution Section
