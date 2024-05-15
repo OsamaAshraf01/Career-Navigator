@@ -46,6 +46,7 @@ network_stylesheet = [
 ]
 
 APP_LAYOUT = html.Div([
+    dcc.Location(id="url", refresh=False),
     html.H1(app_settings.APP_NAME),
     html.P("Get Ready for Your Next Job"),
     html.Div([
