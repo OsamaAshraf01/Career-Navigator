@@ -19,10 +19,6 @@
     flex-direction: row;
 }
 
-#skills-checklist input[type="checkbox"]:checked ~ .checkmark{
-    background-color: #84CC16;
-}
-
 #continue-button{
     width: 20%;
 }
