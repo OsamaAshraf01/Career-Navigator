@@ -86,11 +86,14 @@ default_graph = px.bar(pd.DataFrame({'Skill': [], 'Demand': []}), y='Skill', x='
     selector=dict(type='bar'),
 )
 
-
+# TODO
 def make_bar_graph(nodes, edges, excluded_skills=[]):
-    betweenness = calc_betweenness(edges, main_nodes=nodes, exclude=excluded_skills)  # , exclude=['Data Analysis'])
-    df = pd.DataFrame(betweenness).reset_index()
+    betweenness = calc_betweenness(edges, main_nodes=nodes, exclude=excluded_skills)
+    scale_factor = 90 / betweenness.sort_values(ascending=False).iloc[0]  # Scale by a factor of 90%
+    
+    df = pd.DataFrame(betweenness*scale_factor).reset_index()
     df.columns = ['Skill', 'Demand']
+    
     graph_height = app_settings.SKILLS_COUNT * 60  # Making a relation between graph size and skills count
     skills_bar = px.bar(df, y='Skill', x='Demand', orientation='h', height=graph_height)  # Creat Bar Graph
     skills_bar.update_layout(
@@ -120,7 +123,7 @@ def make_bar_graph(nodes, edges, excluded_skills=[]):
         shapes=background_rectangles,
     )
     # Ensure that the text property is properly assigned
-    skills_bar.update_traces(text=df['Demand'], textposition='inside')
+    skills_bar.update_traces(text=df['Demand']/scale_factor, textposition='inside')
     # Use texttemplate to format the text display
     skills_bar.update_traces(
         marker_color='#9fff0e',
