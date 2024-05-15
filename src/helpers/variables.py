@@ -110,7 +110,7 @@ APP_LAYOUT = html.Div([
         ], className="section-2"),
 
         html.Section([
-            html.H2("Jobs Timestamp"),
+            html.H2("Posting Frequency"),
             html.Div([
                 dcc.Graph(
                     id='3D-graph',
