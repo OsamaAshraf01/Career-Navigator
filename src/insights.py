@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from dash import html
+import pandas as pd
 
 
 def get_related_courses(query: str) -> list[str]:
@@ -22,8 +23,12 @@ def get_related_courses(query: str) -> list[str]:
     return links
 
 
-def conclude_insights(betweenness):
-    highest_skill_name = str(betweenness.index[-1])
+def conclude_insights(betweenness:pd.Series, excluded_skills=[]):
+    betweenness_copy = betweenness.copy()  # TO save the original betweennesss
+    for skill in excluded_skills:
+        betweenness_copy = betweenness_copy.drop(skill) # Remove known skills
+    
+    highest_skill_name = str(betweenness_copy.index[-1])
     
     courses_links = get_related_courses(highest_skill_name)  # TODO! Make sure that it is working properly
     

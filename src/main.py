@@ -64,10 +64,9 @@ def show_options_div(n_clicks, job_title:str):
      Output('anaysis-div', 'style'),
      Input('continue-button', 'n_clicks'),
      State('skills-checklist', 'value'),
-     State('entered-job-title', 'value'),
     prevent_initial_call=True
 )
-def update_graphs(n_clicks, excluded_skills, job_title: str):
+def update_graphs(n_clicks, excluded_skills):
     # ! Network Section
     Graph_elements = generate_network(titles_nodes, skills_nodes, edges)
 
@@ -75,12 +74,7 @@ def update_graphs(n_clicks, excluded_skills, job_title: str):
     skills_bar = bar_graph
 
     # ! Insights Secion
-    global betweenness
-    betweenness_copy = betweenness.copy()  # TO save the original betweennesss
-    for skill in excluded_skills:
-        betweenness_copy = betweenness_copy.drop(skill) # Remove known skills
-
-    related_courses, highest_skill = conclude_insights(betweenness_copy)
+    related_courses, highest_skill = conclude_insights(betweenness, excluded_skills)
 
     # ! Jobs Destribution Section
     heatmap = generate_heatmap(matched_jobs)
