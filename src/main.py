@@ -7,18 +7,9 @@ from network import generate_network
 from maps import generate_heatmap
 from plot_3d import make_3D_plot
 
-# TODO: Filter graph from zero Centrality edges
-# TODO: Add conclusions from Betweenness (Bar Graph and text)
-# TODO: More Betweennees --> more near to center
-# TODO: Scale Bars to be more visible
-
-
 app = Dash(__name__)
 
 app.layout = APP_LAYOUT
-# matched_jobs=[];titles_nodes=[];skills_nodes=[];edges=[]
-
-
 
 # First Callback: When click submit button ---> Show opotions div
 @callback(
