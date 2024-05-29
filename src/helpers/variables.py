@@ -1,6 +1,6 @@
 import dash_cytoscape as cyto
 from dash import dcc, html
-from graph import default_graph
+from visualizations.graph import default_graph
 from helpers.config import get_settings
 app_settings = get_settings()
 

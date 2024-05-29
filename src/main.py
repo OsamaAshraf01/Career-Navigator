@@ -1,14 +1,13 @@
 from dash import Dash, Input, Output, State, callback
 from helpers.variables import APP_LAYOUT
 from functions import get_jobs, extract_graph_elements
-from graph import make_bar_graph
+from visualizations.graph import make_bar_graph
 from insights import conclude_insights
-from network import generate_network
+from visualizations.network import generate_network
 from maps import generate_heatmap
-from plot_3d import make_3D_plot
+from visualizations.plot_3d import make_3D_plot
 
 app = Dash(__name__)
-
 app.layout = APP_LAYOUT
 
 # First Callback: When click submit button ---> Show opotions div

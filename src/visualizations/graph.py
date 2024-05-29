@@ -1,6 +1,6 @@
 import pandas as pd
 import plotly.express as px
-from network import calc_betweenness
+from visualizations.network import calc_betweenness
 from helpers.config import get_settings
 
 app_settings = get_settings()
